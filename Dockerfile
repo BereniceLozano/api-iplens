@@ -1,18 +1,24 @@
-# Use OpenJDK 17 como base
+# Base image
 FROM eclipse-temurin:17-jdk-jammy
 
-# Directorio de trabajo
+# Workdir
 WORKDIR /app
 
-# Copia pom y fuentes
+# Copiar archivos necesarios
 COPY pom.xml .
+COPY mvnw .
+COPY .mvn .mvn
 COPY src ./src
+
+# Dar permisos a mvnw dentro de la imagen
+RUN chmod +x mvnw
 
 # Construir la app
 RUN ./mvnw clean package -DskipTests
 
-# Exponer el puerto
+# Exponer puerto
 EXPOSE 9090
 
-# Comando para correr
+# Correr la app
 CMD ["java", "-jar", "target/iplens-1.0.0.jar"]
+
