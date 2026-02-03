@@ -1,0 +1,17 @@
+name: Keep API Alive
+
+# Cada 14 minutos
+on:
+  schedule:
+    - cron: "*/14 * * * *"  # Ejecuta cada 14 minutos
+  workflow_dispatch:          # Permite ejecutar manualmente
+
+jobs:
+  ping-api:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Ping IP Lens API
+        run: |
+          echo "🚀 Pinging API to keep it alive..."
+          curl -X GET "https://api-iplens.onrender.com/iplens/ip" -H "accept: */*" || echo "⚠️ Request failed"
