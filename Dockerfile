@@ -17,11 +17,11 @@ RUN chmod +x mvnw
 RUN ./mvnw clean package -DskipTests
 
 # Renombrar el archivo jar a un nombre fijo
-RUN cp target/*.jar iplens.jar
+RUN cp target/*.jar ./iplens.jar
 
 # Exponer puerto
 EXPOSE 9090
 
 # Correr la app
-CMD ["java", "-jar", "target/iplens.jar"]
+CMD ["java", "-jar", "iplens.jar"]
 
