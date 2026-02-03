@@ -1,0 +1,41 @@
+server:
+  port: ${PORT:9090}
+  error:
+    include-stacktrace: never
+    include-message: always
+
+spring:
+  application:
+    name: iplens
+  datasource:
+    url: jdbc:h2:mem:ipdb
+    driver-class-name: org.h2.Driver
+    username: sa
+    password:
+  h2:
+    console:
+      enabled: true
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+
+springdoc:
+  api-docs:
+    path: /v3/api-docs
+  swagger-ui:
+    path: /swagger-ui
+
+ipregistry:
+  base-url: https://api.ipregistry.co
+  api-key: ${IPREGISTRY_API_KEY}
+  fields: ${IPREGISTRY_FIELDS}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+  endpoint:
+    health:
+      show-details: never
